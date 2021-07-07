@@ -26,11 +26,11 @@ CREATE TABLE IF NOT EXISTS petfinder_params (
 CREATE INDEX personality_petfinder_index ON petfinder_params(personality_id);
 
 COPY personality
-FROM '../data/personality.csv'
+FROM '/Users/vytran/Downloads/personality.csv'
 DELIMITER ','
 CSV HEADER;
 
 COPY petfinder_params
-FROM '../data/pf_params.csv'
+FROM '/Users/vytran/Downloads/pf_params.csv'
 DELIMITER ','
 CSV HEADER;
