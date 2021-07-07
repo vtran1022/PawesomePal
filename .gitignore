@@ -36,5 +36,5 @@ bower_components/
 
 
 # everything else
-vars.env
+.env
 package-lock.json
