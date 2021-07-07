@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS petfinder_params (
   id SERIAL PRIMARY KEY,
   type VARCHAR(50) NOT NULL,
   breed VARCHAR(50) NOT NULL,
+  personality_id SMALLINT NOT NULL,
   CONSTRAINT fk_personality
     FOREIGN KEY(personality_id)
       REFERENCES personality(id)
