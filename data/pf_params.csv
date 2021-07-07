@@ -1,0 +1,21 @@
+id,type,breed,personality_id
+1,cat,american bobtail,4
+2,cat,bengal,3
+3,cat,bombay,2
+4,cat,himalayan,5
+5,cat,maine coon,1
+6,cat,oriental short hair,1
+7,cat,ragdoll,3
+8,cat,siamese,2
+9,cat,sphynx,5
+10,cat,tuxedo,4
+11,cat,airedale terrier,2
+12,dog,akita,3
+13,dog,dachshund,1
+14,dog,doberman pinscher,5
+15,dog,maltese,4
+16,dog,mastiff,5
+17,dog,pug,4
+18,dog,collie,3
+19,dog,yorkshire terrier,2
+20,dog,dalmatian,1
