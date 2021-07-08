@@ -20,7 +20,7 @@ const Form = () => {
 
       <FormControl>
         <InputLabel id="species-label">Species</InputLabel>
-        <Select labelId="species-label" id="species-select" label="Species" value="both">
+        <Select labelId="species-label" id="species-select" value="both">
           <MenuItem id="cat" value="cat">Cat</MenuItem>
           <MenuItem id="dog" value="dog">Dog</MenuItem>
           <MenuItem id="both" value="both">Both</MenuItem>
@@ -29,7 +29,7 @@ const Form = () => {
 
       <FormControl>
         <InputLabel id="gender-label">Gender</InputLabel>
-        <Select id="gender-select" label="Gender" value="both" select>
+        <Select labelId="gender-label" id="gender-select" value="both">
           <MenuItem id="male" value="M">M</MenuItem>
           <MenuItem id="female" value="F">F</MenuItem>
           <MenuItem id="both" value="both">Both</MenuItem>
