@@ -11,6 +11,7 @@ const Form = () => {
     species: '',
     gender: ''
   });
+  const [trait_id, setId] = useState(0);
 
   const fetchTraits = () => {
     axios.get('/traits')
@@ -23,6 +24,12 @@ const Form = () => {
       ...formState,
       [event.target.name]: event.target.value
     });
+
+    if (event.target.name === 'trait') {
+      const value = event.target.value;
+      const len = value.length - 1;
+      setId(value.slice(len));
+    }
   };
 
   useEffect(() => {
@@ -50,9 +57,8 @@ const Form = () => {
           {traitList !== 0
             ? [traitList.map((trait) => (
               <MenuItem
-                key={`${trait.id}+${trait.trait}`}
-                id={trait.id}
-                value={trait.trait}
+                key={`${20 * trait.id}${trait.trait}`}
+                value={`${trait.trait}${trait.id}`}
               >
                 {trait.trait}
               </MenuItem>
@@ -75,7 +81,7 @@ const Form = () => {
           >
           {speciesList.map((animal, i) => (
             <MenuItem
-              key={`${animal}+${20*i}`}
+              key={`${animal}${20*i}`}
               value={animal}
             >
               {animal}
@@ -97,7 +103,7 @@ const Form = () => {
         >
           {genderList.map((gender, i) => (
               <MenuItem
-                key={`${gender}+${20*i}`}
+                key={`${gender}${20*i}`}
                 value={gender}
               >
                 {gender}
