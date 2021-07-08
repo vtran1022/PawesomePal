@@ -1,17 +1,17 @@
 const axios = require('axios');
 
-const fetchApiData = (params) => {
+const fetchPet = (breeds, gender) => {
   return fetchToken()
     .then((token) => {
-      const config = {
+      const params = {
         headers: { Authorization: `Bearer ${token}` },
         params: {
-          breed: params[0],
-          gender: params[1]
+          breed: breeds,
+          gender
         }
       };
 
-      return axios.get('https://api.petfinder.com/v2/animals', config)
+      return axios.get('https://api.petfinder.com/v2/animals', params)
         .then((data) => {
           const index = Math.floor(Math.random() * 20 + 1)
           return data.data.animals[index];
@@ -31,4 +31,4 @@ const fetchToken = () => {
     .then((response) => response.data.access_token);
 };
 
-module.exports = fetchApiData;
+module.exports = fetchPet;

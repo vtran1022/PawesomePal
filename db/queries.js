@@ -2,19 +2,19 @@ const pool = require('./index.js');
 const axios = require('axios');
 
 // send personality traits to the client-side
-const fetchPersonality = () => {
+const fetchPersonalityTraits = () => {
   const queryStr = 'SELECT * FROM personality';
   return pool.query(queryStr)
     .then((data) => data.rows);
 };
 
-const fetchBreedInfo = (params) => {
+const fetchBreedInfo = (id, type) => {
   let queryStr;
 
   // if user selects both cat and dog
-  if (params[1] === 'both') {
+  if (type === 'both') {
     queryStr = 'SELECT breed FROM petfinder_params WHERE personality_id = $1';
-    return pool.query(queryStr, [params[0]])
+    return pool.query(queryStr, [id])
       .then((data) => {
         let breeds = [];
         data.rows.forEach(obj => breeds.push(obj.breed));
@@ -23,7 +23,7 @@ const fetchBreedInfo = (params) => {
   }
 
   queryStr = 'SELECT breed FROM petfinder_params WHERE personality_id = $1 AND type = $2';
-  return pool.query(queryStr, params)
+  return pool.query(queryStr, [id, type])
     .then((data) => {
       let breeds = [];
       data.rows.forEach(obj => breeds.push(obj.breed));
@@ -32,6 +32,6 @@ const fetchBreedInfo = (params) => {
 };
 
 module.exports = {
-  fetchPersonality,
+  fetchPersonalityTraits,
   fetchBreedInfo
 };

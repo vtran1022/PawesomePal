@@ -1,8 +1,8 @@
-const { fetchPersonality, fetchBreedInfo } = require('../db/queries.js');
-const fetchApiData = require('../db/apiquery.js');
+const { fetchPersonalityTraits, fetchBreedInfo } = require('../db/queries.js');
+const fetchPet = require('../db/apiquery.js');
 
 const getTraits = (req, res) => {
-  fetchPersonality()
+  fetchPersonalityTraits()
     .then((data) => res.status(200).send(data))
     .catch((err) => {
       res.status(500).send(`Error fetching traits: ${err}`)
@@ -16,10 +16,10 @@ const getPetMatch = (req, res) => {
     gender = 'male,female';
   }
 
-  fetchBreedInfo([ req.body.trait_id, req.body.type ])
+  fetchBreedInfo(req.body.trait_id, req.body.type)
     .then((breeds) => {
-      fetchApiData([breeds, gender])
-      .then((data) => res.status(200).send(data));
+      fetchPet(breeds, gender)
+      .then((data) => res.status(200).send(data))
     })
     .catch((err) => {
       res.status(500).send(`Error fetching pets: ${err}`)
