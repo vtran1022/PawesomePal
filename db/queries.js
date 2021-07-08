@@ -5,7 +5,7 @@ const axios = require('axios');
 const fetchPersonality = () => {
   const queryStr = 'SELECT * FROM personality';
   return pool.query(queryStr)
-    .then((data) => data.rows[0]);
+    .then((data) => data.rows);
 };
 
 const fetchBreedInfo = (params) => {
