@@ -18,7 +18,7 @@ const fetchBreedInfo = (params) => {
       .then((data) => {
         let breeds = [];
         data.rows.forEach(obj => breeds.push(obj.breed));
-        return breeds;
+        return breeds.toString();
       });
   }
 
@@ -27,7 +27,7 @@ const fetchBreedInfo = (params) => {
     .then((data) => {
       let breeds = [];
       data.rows.forEach(obj => breeds.push(obj.breed));
-      return breeds;
+      return breeds.toString();
     });
 };
 
