@@ -1,31 +1,40 @@
 import React, { useState, useEffect } from 'react';
-import { Button, FormControl, InputLabel, Input, FormHelperText, TextField, MenuItem } from '@material-ui/core';
+import { Button, FormControl, InputLabel, Input, FormHelperText, Select, MenuItem } from '@material-ui/core';
 
 const Form = () => {
   return (
     <>
       <FormControl>
-        <InputLabel htmlFor="human-name">Name:</InputLabel>
-        <Input id="human-name"></Input>
-        <FormHelperText id="human-name-helper-text">Required</FormHelperText>
+        <InputLabel id="name-label">Name:</InputLabel>
+        <Input id="name"></Input>
+        <FormHelperText id="name-helper-text">Required</FormHelperText>
       </FormControl>
 
-      <TextField id="trait-select" label="Trait" value="20" select>
-        <MenuItem value="10">Ten</MenuItem>
-        <MenuItem value="20">Twenty</MenuItem>
-      </TextField>
+      <FormControl>
+        <InputLabel id="trait-label">Trait</InputLabel>
+        <Select labelId="trait-label" id="trait-select" value="20">
+          <MenuItem value="10">Ten</MenuItem>
+          <MenuItem value="20">Twenty</MenuItem>
+        </Select>
+      </FormControl>
 
-      <TextField id="species-select" label="Species" value="both" select>
-        <MenuItem id="cat" value="cat">Cat</MenuItem>
-        <MenuItem id="dog" value="dog">Dog</MenuItem>
-        <MenuItem id="both" value="both">Both</MenuItem>
-      </TextField>
+      <FormControl>
+        <InputLabel id="species-label">Species</InputLabel>
+        <Select labelId="species-label" id="species-select" label="Species" value="both">
+          <MenuItem id="cat" value="cat">Cat</MenuItem>
+          <MenuItem id="dog" value="dog">Dog</MenuItem>
+          <MenuItem id="both" value="both">Both</MenuItem>
+        </Select>
+      </FormControl>
 
-      <TextField id="gender-select" label="Gender" value="both" select>
-        <MenuItem id="male" value="M">M</MenuItem>
-        <MenuItem id="female" value="F">F</MenuItem>
-        <MenuItem id="both" value="both">Both</MenuItem>
-      </TextField>
+      <FormControl>
+        <InputLabel id="gender-label">Gender</InputLabel>
+        <Select id="gender-select" label="Gender" value="both" select>
+          <MenuItem id="male" value="M">M</MenuItem>
+          <MenuItem id="female" value="F">F</MenuItem>
+          <MenuItem id="both" value="both">Both</MenuItem>
+        </Select>
+      </FormControl>
 
       <Button variant="contained" color="primary">
         Submit
@@ -35,10 +44,3 @@ const Form = () => {
 };
 
 export default Form;
-
-/*
-Your Name:
-Your Personality Trait:
-Species: (Cat/Dog/Both)
-Gender: (M/F/Both)
-*/
