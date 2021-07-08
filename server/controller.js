@@ -1,10 +1,12 @@
-const { fetchPersonality } = require('../db/queries.js');
+const { fetchPersonality, fetchAdditionalInfo } = require('../db/queries.js');
 
 const petMatch = (req, res) => {
-  const trait = req.query.trait;
-  fetchPersonality(trait)
-    .then((data) => {
-      res.send(`data data`);
+  fetchPersonality(req.body.trait)
+    .then((id) => {
+      fetchAdditionalInfo([id, req.body.type])
+      .then((breeds) => {
+        res.send(`data data ${breeds}`);
+      })
     })
     .catch((err) => res.send(`Error ${err}`));
 };
