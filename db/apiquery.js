@@ -10,17 +10,19 @@ const fetchApiData = () => {
         headers: { Authorization: `Bearer ${token}` },
         params: {
           breed,
-          gender
+          gender,
         }
       };
 
       return axios.get('https://api.petfinder.com/v2/animals', config)
-        .then((data) => console.log(data.data.animals));
-    })
-    .catch((err) => console.error(`Error getting access token: ${err}\n\n${err.stack}`));
+        .then((data) => {
+          const index = Math.floor(Math.random() * 20 + 1)
+          return data.data.animals[index];
+        });
+    });
 };
 
-
+// this gets the access token
 const fetchToken = () => {
   const headers = {
     "grant_type": process.env.GRANT_TYPE,
