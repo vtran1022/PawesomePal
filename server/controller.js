@@ -30,4 +30,4 @@ const getPetMatch = (req, res) => {
 module.exports = {
   getTraits,
   getPetMatch
-}
+};
