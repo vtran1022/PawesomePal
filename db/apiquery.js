@@ -1,16 +1,13 @@
 const axios = require('axios');
 
-const fetchApiData = () => {
-  const breed = 'pug,corgi';
-  const gender = 'male'
-
+const fetchApiData = (params) => {
   return fetchToken()
     .then((token) => {
       const config = {
         headers: { Authorization: `Bearer ${token}` },
         params: {
-          breed,
-          gender,
+          breed: params[0],
+          gender: params[1]
         }
       };
 
