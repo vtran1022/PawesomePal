@@ -1,16 +1,19 @@
-const { fetchPersonality, fetchAdditionalInfo } = require('../db/queries.js');
+const { fetchPersonality, fetchBreedInfo } = require('../db/queries.js');
 
-const petMatch = (req, res) => {
-  fetchPersonality(req.body.trait)
-    .then((id) => {
-      fetchAdditionalInfo([id, req.body.type])
-      .then((breeds) => {
-        res.send(`data data ${breeds}`);
-      })
-    })
-    .catch((err) => res.send(`Error ${err}`));
+const getTraits = (req, res) => {
+  fetchPersonality()
+    .then((data) => res.status(200).send(data))
+    .catch((err) => {
+      res.status(500).send(`Error fetching traits: ${err}`)
+      console.error(`Error fetching products: ${err}\n\n${err.stack}`);
+    });
+};
+
+const getPetMatch = (req, res) => {
+
 };
 
 module.exports = {
-  petMatch
+  getTraits,
+  getPetMatch
 }
