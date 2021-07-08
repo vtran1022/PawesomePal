@@ -1,38 +1,108 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Button, FormControl, InputLabel, Input, FormHelperText, Select, MenuItem } from '@material-ui/core';
 
 const Form = () => {
+  const [traitList, setTraitList] = useState([]);
+  const [speciesList, setSpeciesList] = useState(['cat', 'dog', 'both']);
+  const [genderList, setGenderList] = useState(['male', 'female', 'both']);
+  const [formState, setFormState] = useState({
+    trait: '',
+    species: '',
+    gender: ''
+  });
+
+  const fetchTraits = () => {
+    axios.get('/traits')
+      .then((data) => setTraitList(data.data))
+      .catch((err) => `Error retrieving traits: ${err}`);
+  };
+
+  const handleChange = (event) => {
+    setFormState({
+      ...formState,
+      [event.target.name]: event.target.value
+    });
+  };
+
+  useEffect(() => {
+    fetchTraits();
+  }, []);
+
   return (
     <>
       <FormControl>
         <InputLabel id="name-label">Name:</InputLabel>
         <Input id="name"></Input>
-        <FormHelperText id="name-helper-text">Required</FormHelperText>
       </FormControl>
 
       <FormControl>
         <InputLabel id="trait-label">Trait</InputLabel>
-        <Select labelId="trait-label" id="trait-select" value="20">
-          <MenuItem value="10">Ten</MenuItem>
-          <MenuItem value="20">Twenty</MenuItem>
+        <Select
+          labelId="trait-label"
+          id="trait-select"
+          value={formState.trait}
+          onChange={handleChange}
+          inputProps={{
+            name: 'trait'
+          }}
+        >
+          {traitList !== 0
+            ? [traitList.map((trait) => (
+              <MenuItem
+                key={`${trait.id}+${trait.trait}`}
+                id={trait.id}
+                value={trait.trait}
+              >
+                {trait.trait}
+              </MenuItem>
+              ))]
+            : <MenuItem id="holder"></MenuItem>
+          }
         </Select>
       </FormControl>
 
       <FormControl>
         <InputLabel id="species-label">Species</InputLabel>
-        <Select labelId="species-label" id="species-select" value="both">
-          <MenuItem id="cat" value="cat">Cat</MenuItem>
-          <MenuItem id="dog" value="dog">Dog</MenuItem>
-          <MenuItem id="both" value="both">Both</MenuItem>
+        <Select
+          labelId="species-label"
+          id="species-select"
+          value={formState.species}
+          onChange={handleChange}
+          inputProps={{
+            name: 'species'
+          }}
+          >
+          {speciesList.map((animal, i) => (
+            <MenuItem
+              key={`${animal}+${20*i}`}
+              value={animal}
+            >
+              {animal}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
 
       <FormControl>
         <InputLabel id="gender-label">Gender</InputLabel>
-        <Select labelId="gender-label" id="gender-select" value="both">
-          <MenuItem id="male" value="M">M</MenuItem>
-          <MenuItem id="female" value="F">F</MenuItem>
-          <MenuItem id="both" value="both">Both</MenuItem>
+        <Select
+          labelId="gender-label"
+          id="gender-select"
+          value={formState.gender}
+          onChange={handleChange}
+          inputProps={{
+            name: 'gender'
+          }}
+        >
+          {genderList.map((gender, i) => (
+              <MenuItem
+                key={`${gender}+${20*i}`}
+                value={gender}
+              >
+                {gender}
+              </MenuItem>
+            ))}
         </Select>
       </FormControl>
 
