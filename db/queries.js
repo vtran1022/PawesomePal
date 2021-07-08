@@ -1,12 +1,14 @@
 const pool = require('./index.js');
+const axios = require('axios');
 
-const fetchPersonality = (params) => {
-  const queryStr = 'SELECT id FROM personality WHERE trait = $1';
-  return pool.query(queryStr, [params])
-    .then((data) => data.rows[0].id);
+// send personality traits to the client-side
+const fetchPersonality = () => {
+  const queryStr = 'SELECT * FROM personality';
+  return pool.query(queryStr)
+    .then((data) => data.rows[0]);
 };
 
-const fetchAdditionalInfo = (params) => {
+const fetchBreedInfo = (params) => {
   let queryStr;
 
   // if user selects both cat and dog
@@ -29,9 +31,7 @@ const fetchAdditionalInfo = (params) => {
     });
 };
 
-
-
 module.exports = {
   fetchPersonality,
-  fetchAdditionalInfo
+  fetchBreedInfo
 };
