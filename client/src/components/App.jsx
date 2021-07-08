@@ -1,9 +1,13 @@
 import React from 'react';
+import { Typography } from '@material-ui/core';
+import Form from './Form.jsx';
+
 
 const App = () => {
   return (
     <>
-    <h1>Pawesome Pal</h1>
+    <Typography variant="h1">Pawesome Pal</Typography>
+    <Form />
     </>
   )
 };
