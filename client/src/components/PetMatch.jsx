@@ -16,10 +16,10 @@ const PetMatch = ({ name, pet }) => {
     {isLoaded
       ? <>
         <Typography variant="body1">
-          Congratulations {name}! <i>-drumroll-</i> Your pawesome pal is {pet.name}!
+          Congratulations {name}! <i>-drumroll-</i> &nbsp; Your pawesome pal is {pet.name}!
         </Typography>
 
-        <img src={pet.primary_photo_cropped.large ? pet.primary_photo_cropped.large : errimage}></img>
+        <img src={pet.primary_photo_cropped ? pet.primary_photo_cropped.large : errimage}></img>
 
         <Typography variant="body1">{pet.description}</Typography>
 
