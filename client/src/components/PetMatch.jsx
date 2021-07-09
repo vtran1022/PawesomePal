@@ -33,8 +33,6 @@ const PetMatch = ({ name, pet }) => {
   }, [pet]);
 
   useEffect(() => {
-    console.log(isLoaded);
-
     isLoaded === true
       ? setTimeout(() => {
           setTime(true);
