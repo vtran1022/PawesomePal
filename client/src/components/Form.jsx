@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button, FormControl, InputLabel, Input, FormHelperText, Select, MenuItem } from '@material-ui/core';
+import PetMatch from './PetMatch.jsx';
 
 const Form = () => {
   const [traitList, setTraitList] = useState([]);
@@ -12,6 +13,8 @@ const Form = () => {
     gender: ''
   });
   const [trait_id, setId] = useState(0);
+  const [ifMatch, setMatch] = useState(false);
+  const [isDisabled, setDisabled] = useState(true);
 
   const fetchTraits = () => {
     axios.get('/traits')
@@ -32,9 +35,25 @@ const Form = () => {
     }
   };
 
+  const handleSubmit = () => {
+    setMatch(true);
+
+    axios.get('/petmatch')
+  }
+
   useEffect(() => {
     fetchTraits();
   }, []);
+
+  useEffect(() => {
+    const formValues = Object.values(formState);
+    const filterValues = formValues.filter((value) => value !== '');
+
+    filterValues.length === 3
+      ? setDisabled(false)
+      : null;
+
+  }, [formState]);
 
   return (
     <>
@@ -112,9 +131,19 @@ const Form = () => {
         </Select>
       </FormControl>
 
-      <Button variant="contained" color="primary">
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleSubmit}
+        disabled={isDisabled}
+      >
         Submit
       </Button>
+
+      {ifMatch
+        ? <PetMatch />
+        : null
+      }
     </>
   )
 };
