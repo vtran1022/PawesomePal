@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import errimage from './imagenot.png';
-import { Typography, Paper, Grid } from '@material-ui/core';
+import { Typography, Paper, Grid, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
 
@@ -21,6 +21,10 @@ const PetMatch = ({ name, pet }) => {
   const [isLoaded, setLoaded] = useState(false);
   const [isTimed, setTime] = useState(false);
   const classes = useStyles();
+
+  const refreshPage = () => {
+    window.location.reload();
+  };
 
   useEffect(() => {
     Object.keys(pet).length !== 0
@@ -75,6 +79,16 @@ const PetMatch = ({ name, pet }) => {
                     <br></br>
                     For more information, please <a href={pet.url}>click here.</a> You will be redirected to petFinder.
                   </Typography>
+
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={refreshPage}
+                    style={{ "marginTop": 20 }}
+                  >
+                    Refresh
+                  </Button>
+
                 </Grid>
               : <Grid container justifyContent="center" alignItems="center">
                   <Typography variant="body1">
