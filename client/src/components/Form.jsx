@@ -10,8 +10,9 @@ const useStyles = makeStyles((theme) => ({
     width: 200
   },
   paper: {
-    width: 450,
-    padding: theme.spacing(3)
+    width: 600,
+    padding: theme.spacing(3),
+    marginBottom: 20
   }
 }));
 
@@ -79,125 +80,122 @@ const Form = () => {
   return (
     <>
     <Grid container justifyContent="center">
-    <Paper className={classes.paper}>
+      <Paper className={classes.paper}>
+        <Grid container direction="column" alignItems="center">
+          <Grid item>
+            <Typography variant="h6">
+              The hooman
+            </Typography>
 
-      <Typography variant="h6">
-        The hooman
-      </Typography>
+            <Typography variant="subtitle2">
+              Tell us your name and a trait that best describes you
+            </Typography>
 
-      <Typography variant="subtitle2">
-        Tell us your name and a trait that best describes you
-      </Typography>
-
-        <form>
-          <FormControl className={classes.cell}>
-            <InputLabel id="name-label">Name</InputLabel>
-            <Input
-              id="name-input"
-              onChange={handleChange}
-              inputProps={{ name: 'name' }}
-            >
-              {formState.name}
-            </Input>
-          </FormControl>
-
-          <FormControl className={classes.cell}>
-            <InputLabel id="trait-label">Trait</InputLabel>
-            <Select
-              labelId="trait-label"
-              id="trait-select"
-              value={formState.trait}
-              onChange={handleChange}
-              inputProps={{ name: 'trait' }}
-            >
-              {traitList !== 0
-                ? [traitList.map((trait) => (
-                  <MenuItem
-                    key={`${20 * trait.id}${trait.trait}`}
-                    value={`${trait.trait}${trait.id}`}
+            <form>
+              <FormControl className={classes.cell}>
+                <InputLabel id="name-label">Name</InputLabel>
+                <Input
+                  id="name-input"
+                  onChange={handleChange}
+                  inputProps={{ name: 'name' }}
                   >
-                    {trait.trait}
-                  </MenuItem>
-                  ))]
-                : <MenuItem id="holder"></MenuItem>
-              }
-            </Select>
-          </FormControl>
-        </form>
+                  {formState.name}
+                </Input>
+              </FormControl>
 
-      <Typography variant="h6">
-        The soon-to-be pal
-      </Typography>
+              <FormControl className={classes.cell}>
+                <InputLabel id="trait-label">Trait</InputLabel>
+                <Select
+                  labelId="trait-label"
+                  id="trait-select"
+                  value={formState.trait}
+                  onChange={handleChange}
+                  inputProps={{ name: 'trait' }}
+                  >
+                  {traitList !== 0
+                    ? [traitList.map((trait) => (
+                      <MenuItem
+                      key={`${20 * trait.id}${trait.trait}`}
+                      value={`${trait.trait}${trait.id}`}
+                      >
+                        {trait.trait}
+                      </MenuItem>
+                      ))]
+                      : <MenuItem id="holder"></MenuItem>
+                    }
+                </Select>
+              </FormControl>
+            </form>
+          </Grid>
 
-      <Typography variant="subtitle2">
-        Let us know what you seek in your pawesome pal
-      </Typography>
+          <Grid item>
+            <Typography variant="h6">
+              The soon-to-be pal
+            </Typography>
 
-      <form>
-        <FormControl className={classes.cell}>
-          <InputLabel id="species-label">Species</InputLabel>
-          <Select
-            labelId="species-label"
-            id="species-select"
-            value={formState.species}
-            onChange={handleChange}
-            inputProps={{ name: 'species' }}
-            >
-            {speciesList.map((animal, i) => (
-              <MenuItem
-                key={`${animal}${20*i}`}
-                value={animal}
-              >
-                {animal}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl className={classes.cell}>
-          <InputLabel id="gender-label">Gender</InputLabel>
-          <Select
-            labelId="gender-label"
-            id="gender-select"
-            value={formState.gender}
-            onChange={handleChange}
-            inputProps={{ name: 'gender' }}
-          >
-            {genderList.map((gender, i) => (
-                <MenuItem
-                  key={`${gender}${20*i}`}
-                  value={gender}
+            <Typography variant="subtitle2">
+              Let us know what you seek in your pawesome pal
+            </Typography>
+
+            <form>
+              <FormControl className={classes.cell}>
+                <InputLabel id="species-label">Species</InputLabel>
+                <Select
+                  labelId="species-label"
+                  id="species-select"
+                  value={formState.species}
+                  onChange={handleChange}
+                  inputProps={{ name: 'species' }}
+                  >
+                  {speciesList.map((animal, i) => (
+                    <MenuItem
+                      key={`${animal}${20*i}`}
+                      value={animal}
+                    >
+                      {animal}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <FormControl className={classes.cell}>
+                <InputLabel id="gender-label">Gender</InputLabel>
+                <Select
+                  labelId="gender-label"
+                  id="gender-select"
+                  value={formState.gender}
+                  onChange={handleChange}
+                  inputProps={{ name: 'gender' }}
                 >
-                  {gender}
-                </MenuItem>
-              ))}
-          </Select>
-        </FormControl>
-      </form>
+                  {genderList.map((gender, i) => (
+                      <MenuItem
+                        key={`${gender}${20*i}`}
+                        value={gender}
+                      >
+                        {gender}
+                      </MenuItem>
+                    ))}
+                </Select>
+              </FormControl>
+            </form>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleSubmit}
+            disabled={isDisabled}
+            style={{ "marginTop": 20 }}
+          >
+            Submit
+          </Button>
+          </Grid>
 
-      <Grid
-        container
-        direction="row"
-        justifyContent="flex-end"
-        style={{ 'marginTop': 15 }}
-      >
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleSubmit}
-          disabled={isDisabled}
-          style={{ 'marginRight': 10 }}
-        >
-          Submit
-        </Button>
-      </Grid>
-
-    </Paper>
+        </Grid>
+      </Paper>
     </Grid>
 
-      <PetMatch
-        name={formState.name}
-        pet={petInfo}
-      />
+    <PetMatch
+      name={formState.name}
+      pet={petInfo}
+    />
     </>
   )
 };
