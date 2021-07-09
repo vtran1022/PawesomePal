@@ -1,23 +1,40 @@
 import React, { useEffect, useState } from 'react';
 import { Typography } from '@material-ui/core';
 
-const PetMatch = ({ pet }) => {
+const PetMatch = ({ name, pet }) => {
+  const [isLoaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    Object.keys(pet).length !== 0
+      ? setLoaded(true)
+      : null;
+  }, [pet]);
+
   return (
     <>
-      <span>Hello</span>
+    {isLoaded
+      ? <>
+        <Typography variant="body1">
+          Congratulations {name}! <i>-drumroll-</i> Your pawesome pal is {pet.name}!
+        </Typography>
+
+        <img src={pet.primary_photo_cropped}></img>
+        <Typography variant="body1">{pet.description}</Typography>
+
+        <Typography variant="body2">
+          Breed: {pet.breeds.primary}
+          Age: {pet.age}
+          Gender: {pet.gender}
+          Size: {pet.size}
+          <br></br>
+          <br></br>
+          For more information, please <a href={pet.url}>click here.</a> You will be redirected to petFinder.
+        </Typography>
+        </>
+      : null
+    }
     </>
   )
 };
 
 export default PetMatch;
-
-/*
-"Congratulations <name>! You matched with <animal name>"
-
-primary_photo_cropped.large
-Name:
-Breed:
-Age:
-Gender:
-Size:
-*/
