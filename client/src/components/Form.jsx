@@ -43,7 +43,7 @@ const Form = () => {
       gender: formState.gender
     };
 
-    axios.get('/petmatch', params)
+    axios.get('/petmatch', { params })
       .then((data) => {
         setPet(data.data);
       })
