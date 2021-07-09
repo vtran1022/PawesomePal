@@ -13,8 +13,9 @@ const Form = () => {
     gender: ''
   });
   const [trait_id, setId] = useState(0);
-  const [ifMatch, setMatch] = useState(false);
   const [isDisabled, setDisabled] = useState(true);
+  const [ifMatch, setMatch] = useState(false);
+  const [petInfo, setPet] = useState({});
 
   const fetchTraits = () => {
     axios.get('/traits')
@@ -23,22 +24,32 @@ const Form = () => {
   };
 
   const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+
     setFormState({
       ...formState,
-      [event.target.name]: event.target.value
+      [name]: value
     });
 
-    if (event.target.name === 'trait') {
-      const value = event.target.value;
-      const len = value.length - 1;
-      setId(value.slice(len));
-    }
+    name === 'trait'
+      ? setId(value.slice(value.length - 1))
+      : null;
   };
 
   const handleSubmit = () => {
-    setMatch(true);
+    const params = {
+      trait_id,
+      type: formState.species,
+      gender: formState.gender
+    };
 
-    axios.get('/petmatch')
+    axios.get('/petmatch', params)
+      .then((data) => {
+        setPet(data.data);
+        setMatch(true);
+      })
+      .catch((err) => `Error retrieving pet: ${err}`);
   }
 
   useEffect(() => {
@@ -52,7 +63,6 @@ const Form = () => {
     filterValues.length === 3
       ? setDisabled(false)
       : null;
-
   }, [formState]);
 
   return (
