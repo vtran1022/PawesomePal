@@ -5,26 +5,30 @@ import Icon from '@material-ui/core/Icon';
 import Form from './Form.jsx';
 
 const useStyles = makeStyles((theme) => ({
-  root: {}
+  root: {
+    color: theme.palette.primary.light
+  }
 }));
 
 
 const App = () => {
+  const classes = useStyles();
+
   return (
-    <>
-    <Grid
-      container
-      direction="row"
-      justifyContent="center"
-      alignItems="center"
-    >
-      <Icon className="fas fa-cat" style={{ 'marginRight': 30 }}></Icon>
-      <Typography variant="h1">Pawesome Pal</Typography>
-      <Icon className="fas fa-dog" style={{ 'marginLeft': 30 }}></Icon>
-    </Grid>
+    <div className={classes.root}>
+      <Grid
+        container
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Icon className="fas fa-cat" style={{ 'marginRight': 30 }}></Icon>
+        <Typography variant="h1" color="primary">Pawesome Pal</Typography>
+        <Icon className="fas fa-dog" style={{ 'marginLeft': 30 }}></Icon>
+      </Grid>
 
       <Form />
-    </>
+    </div>
   )
 };
 

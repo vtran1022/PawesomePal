@@ -10,9 +10,13 @@ const useStyles = makeStyles((theme) => ({
     width: 200
   },
   paper: {
-    width: 600,
-    padding: theme.spacing(3),
-    marginBottom: 20
+    width: 550,
+    padding: theme.spacing(6),
+    marginBottom: 20,
+    backgroundColor: theme.palette.action.hover
+  },
+  subtitle: {
+    color: theme.palette.info.main
   }
 }));
 
@@ -83,7 +87,7 @@ const Form = () => {
       <Paper className={classes.paper}>
         <Grid container direction="column" alignItems="center">
           <Grid item>
-            <Typography variant="h6">
+            <Typography variant="h6" className={classes.subtitle}>
               The hooman
             </Typography>
 
@@ -129,7 +133,7 @@ const Form = () => {
           </Grid>
 
           <Grid item>
-            <Typography variant="h6">
+            <Typography variant="h6" style={{ 'marginTop': 10 }} className={classes.subtitle}>
               The soon-to-be pal
             </Typography>
 
