@@ -1,7 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Button, FormControl, InputLabel, Input, FormHelperText, Select, MenuItem, Typography } from '@material-ui/core';
+import { Button, FormControl, InputLabel, Input, FormHelperText, Select, MenuItem, Typography, Grid, Paper } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import PetMatch from './PetMatch.jsx';
+
+const useStyles = makeStyles((theme) => ({
+  cell: {
+    margin: 5,
+    width: 200
+  },
+  paper: {
+    width: 450,
+    padding: theme.spacing(3)
+  }
+}));
 
 const Form = () => {
   const [traitList, setTraitList] = useState([]);
@@ -15,6 +27,7 @@ const Form = () => {
   const [trait_id, setId] = useState(0);
   const [isDisabled, setDisabled] = useState(true);
   const [petInfo, setPet] = useState({});
+  const classes = useStyles();
 
   const fetchTraits = () => {
     axios.get('/traits')
@@ -65,7 +78,9 @@ const Form = () => {
 
   return (
     <>
-    <form>
+    <Grid container justifyContent="center">
+    <Paper className={classes.paper}>
+
       <Typography variant="h6">
         The hooman
       </Typography>
@@ -74,39 +89,41 @@ const Form = () => {
         Tell us your name and a trait that best describes you
       </Typography>
 
-      <FormControl>
-        <InputLabel id="name-label">Name</InputLabel>
-        <Input
-          id="name-input"
-          onChange={handleChange}
-          inputProps={{ name: 'name' }}
-        >
-          {formState.name}
-        </Input>
-      </FormControl>
+        <form>
+          <FormControl className={classes.cell}>
+            <InputLabel id="name-label">Name</InputLabel>
+            <Input
+              id="name-input"
+              onChange={handleChange}
+              inputProps={{ name: 'name' }}
+            >
+              {formState.name}
+            </Input>
+          </FormControl>
 
-      <FormControl>
-        <InputLabel id="trait-label">Trait</InputLabel>
-        <Select
-          labelId="trait-label"
-          id="trait-select"
-          value={formState.trait}
-          onChange={handleChange}
-          inputProps={{ name: 'trait' }}
-        >
-          {traitList !== 0
-            ? [traitList.map((trait) => (
-              <MenuItem
-                key={`${20 * trait.id}${trait.trait}`}
-                value={`${trait.trait}${trait.id}`}
-              >
-                {trait.trait}
-              </MenuItem>
-              ))]
-            : <MenuItem id="holder"></MenuItem>
-          }
-        </Select>
-      </FormControl>
+          <FormControl className={classes.cell}>
+            <InputLabel id="trait-label">Trait</InputLabel>
+            <Select
+              labelId="trait-label"
+              id="trait-select"
+              value={formState.trait}
+              onChange={handleChange}
+              inputProps={{ name: 'trait' }}
+            >
+              {traitList !== 0
+                ? [traitList.map((trait) => (
+                  <MenuItem
+                    key={`${20 * trait.id}${trait.trait}`}
+                    value={`${trait.trait}${trait.id}`}
+                  >
+                    {trait.trait}
+                  </MenuItem>
+                  ))]
+                : <MenuItem id="holder"></MenuItem>
+              }
+            </Select>
+          </FormControl>
+        </form>
 
       <Typography variant="h6">
         The soon-to-be pal
@@ -116,61 +133,78 @@ const Form = () => {
         Let us know what you seek in your pawesome pal
       </Typography>
 
-      <FormControl>
-        <InputLabel id="species-label">Species</InputLabel>
-        <Select
-          labelId="species-label"
-          id="species-select"
-          value={formState.species}
-          onChange={handleChange}
-          inputProps={{ name: 'species' }}
-          >
-          {speciesList.map((animal, i) => (
-            <MenuItem
-              key={`${animal}${20*i}`}
-              value={animal}
+      <form>
+        <FormControl className={classes.cell}>
+          <InputLabel id="species-label">Species</InputLabel>
+          <Select
+            labelId="species-label"
+            id="species-select"
+            value={formState.species}
+            onChange={handleChange}
+            inputProps={{ name: 'species' }}
             >
-              {animal}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-
-      <FormControl>
-        <InputLabel id="gender-label">Gender</InputLabel>
-        <Select
-          labelId="gender-label"
-          id="gender-select"
-          value={formState.gender}
-          onChange={handleChange}
-          inputProps={{ name: 'gender' }}
-        >
-          {genderList.map((gender, i) => (
+            {speciesList.map((animal, i) => (
               <MenuItem
-                key={`${gender}${20*i}`}
-                value={gender}
+                key={`${animal}${20*i}`}
+                value={animal}
               >
-                {gender}
+                {animal}
               </MenuItem>
             ))}
-        </Select>
-      </FormControl>
+          </Select>
+        </FormControl>
+        <FormControl className={classes.cell}>
+          <InputLabel id="gender-label">Gender</InputLabel>
+          <Select
+            labelId="gender-label"
+            id="gender-select"
+            value={formState.gender}
+            onChange={handleChange}
+            inputProps={{ name: 'gender' }}
+          >
+            {genderList.map((gender, i) => (
+                <MenuItem
+                  key={`${gender}${20*i}`}
+                  value={gender}
+                >
+                  {gender}
+                </MenuItem>
+              ))}
+          </Select>
+        </FormControl>
+      </form>
 
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleSubmit}
-        disabled={isDisabled}
+      <Grid
+        container
+        direction="row"
+        justifyContent="flex-end"
+        style={{ 'margin-top': 15 }}
       >
-        Submit
-      </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleSubmit}
+          disabled={isDisabled}
+          style={{ 'margin-right': 10 }}
+        >
+          Submit
+        </Button>
+
+        <Button
+          variant="contained"
+          color="primary"
+        >
+          Refresh
+        </Button>
+      </Grid>
+
+    </Paper>
+    </Grid>
 
       <PetMatch
         name={formState.name}
         pet={petInfo}
       />
-
-    </form>
     </>
   )
 };
