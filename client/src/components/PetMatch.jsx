@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import errimage from './imagenot.png';
 import { Typography } from '@material-ui/core';
 
 const PetMatch = ({ name, pet }) => {
@@ -18,7 +19,8 @@ const PetMatch = ({ name, pet }) => {
           Congratulations {name}! <i>-drumroll-</i> Your pawesome pal is {pet.name}!
         </Typography>
 
-        <img src={pet.primary_photo_cropped}></img>
+        <img src={pet.primary_photo_cropped.large ? pet.primary_photo_cropped.large : errimage}></img>
+
         <Typography variant="body1">{pet.description}</Typography>
 
         <Typography variant="body2">
