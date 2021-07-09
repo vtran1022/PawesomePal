@@ -189,13 +189,6 @@ const Form = () => {
         >
           Submit
         </Button>
-
-        <Button
-          variant="contained"
-          color="primary"
-        >
-          Refresh
-        </Button>
       </Grid>
 
     </Paper>
