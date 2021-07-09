@@ -4,7 +4,6 @@ import { Button, FormControl, InputLabel, Input, FormHelperText, Select, MenuIte
 import PetMatch from './PetMatch.jsx';
 
 const Form = () => {
-  const [name, setName] = useState('');
   const [traitList, setTraitList] = useState([]);
   const [speciesList, setSpeciesList] = useState(['cat', 'dog', 'both']);
   const [genderList, setGenderList] = useState(['male', 'female', 'both']);
@@ -61,7 +60,7 @@ const Form = () => {
     const formValues = Object.values(formState);
     const filterValues = formValues.filter((value) => value !== '');
 
-    filterValues.length === 3
+    filterValues.length === 4
       ? setDisabled(false)
       : null;
   }, [formState]);
@@ -69,7 +68,14 @@ const Form = () => {
   return (
     <>
     <form>
-      <Typography variant="overline"></Typography>
+      <Typography variant="h6">
+        The hooman
+      </Typography>
+
+      <Typography variant="subtitle2">
+        Tell us your name and a trait that best describes you
+      </Typography>
+
       <FormControl>
         <InputLabel id="name-label">Name</InputLabel>
         <Input
@@ -77,7 +83,7 @@ const Form = () => {
           onChange={handleChange}
           inputProps={{ name: 'name' }}
         >
-          {name}
+          {formState.name}
         </Input>
       </FormControl>
 
@@ -103,9 +109,15 @@ const Form = () => {
           }
         </Select>
       </FormControl>
-    </form>
 
-    <form>
+      <Typography variant="h6">
+        The soon-to-be pal
+      </Typography>
+
+      <Typography variant="subtitle2">
+        Let us know what you seek in your pawesome pal
+      </Typography>
+
       <FormControl>
         <InputLabel id="species-label">Species</InputLabel>
         <Select
@@ -157,7 +169,7 @@ const Form = () => {
 
       {ifMatch
         ? <PetMatch
-            name={name}
+            name={formState.name}
             pet={petInfo}
           />
         : null
