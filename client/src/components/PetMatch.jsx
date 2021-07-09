@@ -59,24 +59,21 @@ const PetMatch = ({ name, pet }) => {
 
                   <img className={classes.img} src={pet.primary_photo_cropped ? pet.primary_photo_cropped.large : errimage}></img>
 
-                  <Typography variant="body1">
-                    <Grid item style={{ 'width': 450 }}>
-                      {pet.description}
-                    </Grid>
-                  </Typography>
-                  <br></br>
                   <Typography variant="body2">
-                    <b>Breed:</b> {pet.breeds.primary}
                     <br></br>
-                    <b>Age:</b> {pet.age}
+                    <Grid item container direction="column" style={{ 'width': 450 }}>
+                      <Grid item><b>Breed:</b> {pet.breeds.primary}</Grid>
+                      <Grid item><b>Age:</b> {pet.age}</Grid>
+                      <Grid item><b>Gender:</b> {pet.gender}</Grid>
+                      <Grid item><b>Size:</b> {pet.size}</Grid>
+                      {pet.description
+                        ? <Grid item><b>Description:</b> {pet.description}</Grid>
+                        : null
+                      }
+                    </Grid>
                     <br></br>
-                    <b>Gender:</b> {pet.gender}
-                    <br></br>
-                    <b>Size:</b> {pet.size}
-                    <br></br>
-                    <br></br>
-                    For more information, please <a href={pet.url}>click here.</a> You will be redirected to petFinder.
-                  </Typography>
+                      For more information, please <a href={pet.url}>click here.</a> You will be redirected to petFinder.
+                    </Typography>
 
                   <Button
                     variant="contained"
