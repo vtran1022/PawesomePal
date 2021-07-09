@@ -17,38 +17,26 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-  const name = "Fred";
-  const pet = {
-    name: "Bella",
-    description: "Available for Adoption \n“Bella”\n\n2 year 8 lb scruffy mix female. Chihuahua Yorkie  mix .She is a little reserved but...",
-    url: "https://www.petfinder.com/dog/bella-52288656/ky/winchester/fairytails-pet-adoptions-ky550/?referrer_id=4491b933-8254-4a5d-856b-8c34ef9bb017",
-    breeds: { primary: "Yorkshire Terrier" },
-    age: "young",
-    gender: "female",
-    size: "small",
-    primary_photo_cropped: { large: "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/52288656/3/?bust=1625793457&width=600" }
-  };
-
-const PetMatch = ({  }) => {
-  const [isLoaded, setLoaded] = useState(true);
-  const [isTimed, setTime] = useState(true);
+const PetMatch = ({ name, pet }) => {
+  const [isLoaded, setLoaded] = useState(false);
+  const [isTimed, setTime] = useState(false);
   const classes = useStyles();
 
-  // useEffect(() => {
-  //   Object.keys(pet).length !== 0
-  //     ? setLoaded(true)
-  //     : null;
-  // }, [pet]);
+  useEffect(() => {
+    Object.keys(pet).length !== 0
+      ? setLoaded(true)
+      : null;
+  }, [pet]);
 
-  // useEffect(() => {
-  //   console.log(isLoaded);
+  useEffect(() => {
+    console.log(isLoaded);
 
-  //   isLoaded === true
-  //     ? setTimeout(() => {
-  //         setTime(true);
-  //       }, 2000)
-  //     : null;
-  // }, [isLoaded]);
+    isLoaded === true
+      ? setTimeout(() => {
+          setTime(true);
+        }, 2000)
+      : null;
+  }, [isLoaded]);
 
   return (
     <>
