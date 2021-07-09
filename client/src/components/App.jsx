@@ -18,9 +18,9 @@ const App = () => {
       justifyContent="center"
       alignItems="center"
     >
-      <Icon className="fas fa-cat" style={{ 'margin-right': 30 }}></Icon>
+      <Icon className="fas fa-cat" style={{ 'marginRight': 30 }}></Icon>
       <Typography variant="h1">Pawesome Pal</Typography>
-      <Icon className="fas fa-dog" style={{ 'margin-left': 30 }}></Icon>
+      <Icon className="fas fa-dog" style={{ 'marginLeft': 30 }}></Icon>
     </Grid>
 
       <Form />

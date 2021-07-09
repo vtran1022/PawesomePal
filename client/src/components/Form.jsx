@@ -178,14 +178,14 @@ const Form = () => {
         container
         direction="row"
         justifyContent="flex-end"
-        style={{ 'margin-top': 15 }}
+        style={{ 'marginTop': 15 }}
       >
         <Button
           variant="contained"
           color="primary"
           onClick={handleSubmit}
           disabled={isDisabled}
-          style={{ 'margin-right': 10 }}
+          style={{ 'marginRight': 10 }}
         >
           Submit
         </Button>
