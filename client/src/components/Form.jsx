@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Button, FormControl, InputLabel, Input, FormHelperText, Select, MenuItem } from '@material-ui/core';
+import { Button, FormControl, InputLabel, Input, FormHelperText, Select, MenuItem, Typography } from '@material-ui/core';
 import PetMatch from './PetMatch.jsx';
 
 const Form = () => {
+  const [name, setName] = useState('');
   const [traitList, setTraitList] = useState([]);
   const [speciesList, setSpeciesList] = useState(['cat', 'dog', 'both']);
   const [genderList, setGenderList] = useState(['male', 'female', 'both']);
@@ -67,9 +68,17 @@ const Form = () => {
 
   return (
     <>
+    <form>
+      <Typography variant="overline"></Typography>
       <FormControl>
-        <InputLabel id="name-label">Name:</InputLabel>
-        <Input id="name"></Input>
+        <InputLabel id="name-label">Name</InputLabel>
+        <Input
+          id="name-input"
+          onChange={handleChange}
+          inputProps={{ name: 'name' }}
+        >
+          {name}
+        </Input>
       </FormControl>
 
       <FormControl>
@@ -79,9 +88,7 @@ const Form = () => {
           id="trait-select"
           value={formState.trait}
           onChange={handleChange}
-          inputProps={{
-            name: 'trait'
-          }}
+          inputProps={{ name: 'trait' }}
         >
           {traitList !== 0
             ? [traitList.map((trait) => (
@@ -96,7 +103,9 @@ const Form = () => {
           }
         </Select>
       </FormControl>
+    </form>
 
+    <form>
       <FormControl>
         <InputLabel id="species-label">Species</InputLabel>
         <Select
@@ -104,9 +113,7 @@ const Form = () => {
           id="species-select"
           value={formState.species}
           onChange={handleChange}
-          inputProps={{
-            name: 'species'
-          }}
+          inputProps={{ name: 'species' }}
           >
           {speciesList.map((animal, i) => (
             <MenuItem
@@ -126,9 +133,7 @@ const Form = () => {
           id="gender-select"
           value={formState.gender}
           onChange={handleChange}
-          inputProps={{
-            name: 'gender'
-          }}
+          inputProps={{ name: 'gender' }}
         >
           {genderList.map((gender, i) => (
               <MenuItem
@@ -151,9 +156,13 @@ const Form = () => {
       </Button>
 
       {ifMatch
-        ? <PetMatch />
+        ? <PetMatch
+            name={name}
+            pet={petInfo}
+          />
         : null
       }
+    </form>
     </>
   )
 };
