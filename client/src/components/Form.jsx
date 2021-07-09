@@ -14,7 +14,6 @@ const Form = () => {
   });
   const [trait_id, setId] = useState(0);
   const [isDisabled, setDisabled] = useState(true);
-  const [ifMatch, setMatch] = useState(false);
   const [petInfo, setPet] = useState({});
 
   const fetchTraits = () => {
@@ -47,7 +46,6 @@ const Form = () => {
     axios.get('/petmatch', params)
       .then((data) => {
         setPet(data.data);
-        setMatch(true);
       })
       .catch((err) => `Error retrieving pet: ${err}`);
   }
@@ -167,13 +165,11 @@ const Form = () => {
         Submit
       </Button>
 
-      {ifMatch
-        ? <PetMatch
-            name={formState.name}
-            pet={petInfo}
-          />
-        : null
-      }
+      <PetMatch
+        name={formState.name}
+        pet={petInfo}
+      />
+
     </form>
     </>
   )
