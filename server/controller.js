@@ -11,12 +11,12 @@ const getTraits = (req, res) => {
 };
 
 const getPetMatch = (req, res) => {
-  let gender;
-  if (req.body.gender === 'both') {
+  let gender = req.query.gender;
+  if (gender === 'both') {
     gender = 'male,female';
   }
 
-  fetchBreedInfo(req.body.trait_id, req.body.type)
+  fetchBreedInfo(req.query.trait_id, req.query.type)
     .then((breeds) => {
       fetchPet(breeds, gender)
       .then((data) => res.status(200).send(data))
