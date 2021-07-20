@@ -2,7 +2,9 @@
 
 In two days, I built a full-stack web application that helps the user finds their pawesome pal match based on their form input.
 
-# Table of Content
+![pawesomepal](https://user-images.githubusercontent.com/80929887/126242465-390ac550-8e02-4e62-b21c-9a218a6f0db9.gif)
+
+# Table of Contents
 
 1. [Application Details](https://github.com/vtran1022/PawesomePal#application-details)
 2. [Photos](https://github.com/vtran1022/PawesomePal#photos)
